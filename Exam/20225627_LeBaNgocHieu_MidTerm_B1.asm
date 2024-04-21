@@ -1,5 +1,5 @@
 .data
-	a: .word 100
+	a: .word 1000
 	mes1: .asciiz "nhap n:"
 	mes2: .asciiz "nhap m:"
 .text
@@ -20,14 +20,16 @@ scan:
 		bge $t0, $s0, scan_m_n #neu doc hết số phần tử thì rẽ nhánh để giải
 		j for
 scan_m_n:
-	li $v0, 51
-	la $a0, mes1
+	#đọc m
+	li $v0, 5
 	syscall
-	addi $s3, $a0, 0 #n = s3
-	li $v0, 51
-	la $a0, mes2
+	addi $s4, $v0, 0 #n = s3
+	
+	#đọc n
+	li $v0, 5
 	syscall
-	addi $s4, $a0, 0 #m = s4
+	addi $s3, $v0, 0 #m = s4
+	
 solve:
 	li $t0, 0#i = 0
 	li $s2, 0#dem = 0

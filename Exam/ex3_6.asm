@@ -1,6 +1,5 @@
 .data
 	st: .space 256
-	a: .word 1024
 .text
 	li $v0, 8
 	la $a0, st
@@ -11,7 +10,18 @@
  	syscall 
 	
 	addi $t8, $v0, 0
-	addi $t9, $t8, -32
+	addi $t9, $t8, 32
+	#kiểm tra xem c có phải kí tự in hoa hay không
+	la $t5, 'A'
+	la $t6, 'Z'
+	addi $t5, $t5, -1 
+	addi $t6, $t6, 1
+	slt $t1, $t5, $t8 #t1 = 'A' =< c
+	slt $t2, $t8, $t6 #t2 = c <= 'Z'
+	and $t7, $t2, $t1
+	bne $t7, $zero, in_hoa
+	
+	continue:
 	la $s0, st
 	li $t3, 0
 	li $t0, -1 #i = 0
@@ -39,3 +49,9 @@ done:
 	li $v0, 1
 	addi $a0, $t3, 0
 	syscall 
+	li $v0, 10
+	syscall
+in_hoa:
+	addi $t8, $t8, 32
+	addi $t9, $t8, -32
+	j continue
