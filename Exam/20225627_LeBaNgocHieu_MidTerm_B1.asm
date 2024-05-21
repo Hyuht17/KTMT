@@ -43,7 +43,7 @@ solve:
 		bne $t3, $zero, tangdem #in ra neu thoa man 2 dieu kien 
 		continue:
 		addi $t0, $t0, 1 #i = i + 1
-		bge $t0, $s0, print_res #neu doc hết số phần tử thì rẽ nhánh để giải
+		bge $t0, $s0, print_res #neu doc hết số phần tử thì rẽ nhánh để giải 
 		j for1
 tangdem:
 	addi $s2, $s2, 1#dem = dem + 1
